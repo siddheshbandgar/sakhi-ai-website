@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/*
+  Sakhi AI — premium Indian design language.
+  Restraint over decoration: a near-white canvas, deep navy-charcoal ink,
+  an editorial serif for headlines, and soft warm-orange→periwinkle glows
+  that nod to an Indian sunrise. Devanagari and delicate line-art
+  flourishes carry the cultural note quietly. Inspired by Sarvam.
+*/
+
+@theme {
+  /* Surfaces */
+  --color-paper: #fbfaf8;   /* warm near-white canvas */
+  --color-paper-2: #f6f4ef; /* faint warm panel */
+  --color-card: #ffffff;
+
+  /* Ink */
+  --color-ink: #191926;     /* deep navy-charcoal */
+  --color-ink-soft: #56565f;
+  --color-ink-mute: #8a8a93;
+  --color-line: #ece9e2;    /* hairline */
+
+  /* Soft accents — used as glows, not fills */
+  --color-warm: #ee7b3d;    /* sunrise saffron-orange */
+  --color-cool: #8d92e6;    /* periwinkle / neel */
+  --color-lav: #cdcff4;     /* light lavender */
+  --color-sage: #6f9e57;    /* sprout green sparkle */
+  --color-gold: #c9a24b;
+
+  /* Fonts (wired up via next/font variables) */
+  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-deva: var(--font-tiro), serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-warm) 24%, transparent);
+}
+
+/* Editorial serif defaults — light, airy, premium */
+.font-display {
+  font-feature-settings: "liga" 1, "calt" 1;
+  letter-spacing: -0.02em;
+}
+
+/* Sunrise glow — soft orange bleeding into periwinkle, the Sarvam note */
+.glow-hero {
+  background:
+    radial-gradient(60% 42% at 50% 0%, color-mix(in srgb, var(--color-warm) 38%, transparent) 0%, transparent 70%),
+    radial-gradient(70% 55% at 22% 8%, color-mix(in srgb, var(--color-cool) 26%, transparent) 0%, transparent 60%),
+    radial-gradient(70% 55% at 82% 6%, color-mix(in srgb, var(--color-lav) 40%, transparent) 0%, transparent 62%);
+}
+.glow-soft {
+  background:
+    radial-gradient(50% 60% at 50% 50%, color-mix(in srgb, var(--color-cool) 22%, transparent) 0%, transparent 70%),
+    radial-gradient(60% 60% at 70% 30%, color-mix(in srgb, var(--color-warm) 16%, transparent) 0%, transparent 65%);
+}
+
+/* Lavender-to-periwinkle panel for illustration blocks */
+.panel-lav {
+  background: linear-gradient(165deg, #eceefb 0%, #d9dcf6 45%, #c2c6f0 100%);
+}
+
+.text-ink-soft { color: var(--color-ink-soft); }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 46s linear infinite; }
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+/* Entrance */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.rise-2 { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both; }
+.rise-3 { animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.16s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .rise, .rise-2, .rise-3 { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+.card-line { border: 1px solid var(--color-line); }
+.lift { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s, border-color .35s; }
+.lift:hover { transform: translateY(-3px); box-shadow: 0 24px 48px -32px rgba(25,25,38,.45); }
