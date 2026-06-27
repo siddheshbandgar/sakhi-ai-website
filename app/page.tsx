@@ -64,7 +64,7 @@ function Hero() {
 
         <Reveal delay={200}>
           <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-ink-soft">
-            Sakhi takes action across 200+ apps you already use — and gets the work done.
+            Sakhi takes action across 2,000+ apps you already use — and gets the work done.
           </p>
         </Reveal>
 
@@ -108,7 +108,7 @@ function Integrations() {
 function Why() {
   const points = [
     { t: "Acts, doesn't just answer", d: "She completes the task across your apps, then reports back when it's done." },
-    { t: "Lives in your stack", d: "200+ integrations, one conversation. No tab-switching, no copy-paste." },
+    { t: "Lives in your stack", d: "2,000+ integrations, one conversation. No tab-switching, no copy-paste." },
     { t: "Speaks your language", d: "English, हिंदी, and the mix you actually type. Built for how Bharat works." },
   ];
   return (
@@ -211,7 +211,7 @@ function Capabilities() {
 /* -------------------------------- Stats ---------------------------------- */
 function Stats() {
   const stats = [
-    { node: <CountUp value={200} suffix="+" />, l: "apps connected" },
+    { node: <CountUp value={2000} suffix="+" />, l: "apps connected" },
     { node: <CountUp value={1} />, l: "conversation" },
     { node: <CountUp value={0} />, l: "tabs to switch" },
   ];

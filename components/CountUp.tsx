@@ -40,7 +40,7 @@ export default function CountUp({
 
   return (
     <span ref={ref}>
-      {n}
+      {n.toLocaleString("en-IN")}
       {suffix}
     </span>
   );

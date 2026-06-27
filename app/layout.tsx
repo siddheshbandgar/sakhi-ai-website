@@ -25,11 +25,11 @@ const tiro = Tiro_Devanagari_Hindi({
 export const metadata: Metadata = {
   title: "Sakhi AI — The AI assistant that does the work",
   description:
-    "Sakhi takes action across 200+ apps you already use and gets the work done. AI for Bharat. Join the waitlist for early access.",
+    "Sakhi takes action across 2,000+ apps you already use and gets the work done. AI for Bharat. Join the waitlist for early access.",
   openGraph: {
     title: "Sakhi AI — The AI assistant that does the work",
     description:
-      "Sakhi takes action across 200+ apps you already use and gets the work done. Join the waitlist for early access.",
+      "Sakhi takes action across 2,000+ apps you already use and gets the work done. Join the waitlist for early access.",
     type: "website",
   },
 };
