@@ -10,7 +10,7 @@ export default function Reveal({
   children,
   className = "",
   delay = 0,
-  as: Tag = "div",
+  as: TagProp = "div",
   img = false,
 }: {
   children: ReactNode;
@@ -21,6 +21,8 @@ export default function Reveal({
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Tag = TagProp as any;
 
   useEffect(() => {
     const el = ref.current;

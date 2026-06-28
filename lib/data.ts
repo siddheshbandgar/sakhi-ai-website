@@ -70,3 +70,35 @@ export const categories: Category[] = [
 
 // Flat list for the hero marquee
 export const allApps = categories.flatMap((c) => c.apps.map((a) => ({ name: a.name, tint: a.tint })));
+
+// A denser set of well-known apps for the 3D floating gallery — a visual
+// stand-in for the 2,000+ integrations Sakhi connects to.
+export const galleryApps: { name: string; tint: string }[] = [
+  ...allApps,
+  { name: "Asana", tint: "#F06A6A" },
+  { name: "Jira", tint: "#2684FF" },
+  { name: "Zoom", tint: "#2D8CFF" },
+  { name: "Discord", tint: "#5865F2" },
+  { name: "Airtable", tint: "#FCB400" },
+  { name: "Dropbox", tint: "#0061FF" },
+  { name: "Zapier", tint: "#FF4F00" },
+  { name: "Outlook", tint: "#0A6ED1" },
+  { name: "Teams", tint: "#6264A7" },
+  { name: "X", tint: "#1D1D1F" },
+  { name: "Canva", tint: "#00C4CC" },
+  { name: "Webflow", tint: "#4353FF" },
+  { name: "Mailchimp", tint: "#FFE01B" },
+  { name: "Intercom", tint: "#1F8DED" },
+  { name: "Zendesk", tint: "#03363D" },
+  { name: "ClickUp", tint: "#7B68EE" },
+  { name: "Monday", tint: "#FF3D57" },
+  { name: "Calendly", tint: "#006BFF" },
+  { name: "Loom", tint: "#625DF5" },
+  { name: "Vercel", tint: "#111111" },
+  { name: "Razorpay", tint: "#3395FF" },
+  { name: "Telegram", tint: "#26A5E4" },
+  { name: "Miro", tint: "#FFD02F" },
+  { name: "Framer", tint: "#0099FF" },
+  { name: "Supabase", tint: "#3ECF8E" },
+  { name: "PayPal", tint: "#003087" },
+];
