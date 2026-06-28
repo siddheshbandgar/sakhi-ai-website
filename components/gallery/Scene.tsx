@@ -118,11 +118,20 @@ function Gallery({ view }: { view: View }) {
 export default function Scene({ view }: { view: View }) {
   return (
     <Canvas
-      dpr={[1, 2]}
+      dpr={[1, 1.5]}
       camera={{ position: [0, 0, 17], fov: 50 }}
       gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
       style={{ background: "#070709" }}
-      onCreated={({ gl }) => gl.setClearColor("#070709", 1)}
+      onCreated={({ gl }) => {
+        gl.setClearColor("#070709", 1);
+        // Allow the browser to restore a lost GL context instead of going
+        // blank permanently (default behaviour does NOT restore).
+        gl.domElement.addEventListener(
+          "webglcontextlost",
+          (e) => e.preventDefault(),
+          false
+        );
+      }}
     >
       <color attach="background" args={["#070709"]} />
       <fog attach="fog" args={["#070709", 18, 34]} />
@@ -131,7 +140,7 @@ export default function Scene({ view }: { view: View }) {
       <directionalLight position={[5, 8, 6]} intensity={0.7} />
       <directionalLight position={[-6, -3, -6]} intensity={0.35} color="#8d92e6" />
 
-      <Stars radius={60} depth={40} count={1800} factor={3} saturation={0} fade speed={0.6} />
+      <Stars radius={60} depth={40} count={1100} factor={3} saturation={0} fade speed={0.6} />
 
       <Gallery view={view} />
 
