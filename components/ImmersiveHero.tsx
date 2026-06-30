@@ -10,19 +10,19 @@ const Scene = dynamic(() => import("@/components/gallery/Scene"), {
   loading: () => null,
 });
 
-type View = "sphere" | "cylinder";
+type View = "scatter" | "orbit";
 
 export default function ImmersiveHero() {
-  const [view, setView] = useState<View>("sphere");
+  const [view, setView] = useState<View>("scatter");
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-      {/* warm Indian parchment / sunrise backdrop */}
+      {/* warm Indian parchment backdrop (even, paper-like — Pahari feel) */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 90% at 50% -8%, #f8d9a8 0%, #f6e8cf 38%, #f3ecdd 62%, #ece9f3 100%)",
+            "radial-gradient(95% 85% at 50% 38%, #f9f2e2 0%, #f2e8d3 58%, #ebdfc8 100%)",
         }}
       />
       {/* calm the centre so the headline reads cleanly over the logos */}
@@ -60,7 +60,7 @@ export default function ImmersiveHero() {
             <div className="pointer-events-auto flex items-center gap-3 text-[13px] text-ink-mute">
               <span className="uppercase tracking-[0.18em]">Change the view</span>
               <div className="flex items-center gap-1 rounded-full border border-ink/12 bg-white/60 p-1 backdrop-blur">
-                {(["sphere", "cylinder"] as View[]).map((v) => (
+                {(["scatter", "orbit"] as View[]).map((v) => (
                   <button
                     key={v}
                     onClick={() => setView(v)}

@@ -45,10 +45,7 @@ function Capabilities() {
     <section id="capabilities" className="relative mx-auto max-w-6xl px-6 py-28">
       <Reveal>
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[12px] font-medium uppercase tracking-[0.22em] text-ink-mute">
-            Use cases
-          </p>
-          <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink sm:text-[52px] sm:leading-[1.06]">
+          <h2 className="font-display text-4xl font-medium tracking-tight text-ink sm:text-[52px] sm:leading-[1.06]">
             Tell it what to do.
             <br />
             <span className="italic font-normal">Sakhi gets it done.</span>
