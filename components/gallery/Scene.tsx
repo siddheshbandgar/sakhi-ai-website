@@ -1,7 +1,7 @@
 "use client";
 
-import { Suspense, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Billboard, RoundedBox, OrbitControls, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { galleryApps } from "@/lib/data";
@@ -101,13 +101,34 @@ function Card({
 
 /* ------------------------------- the gallery ----------------------------- */
 function Gallery({ view }: { view: View }) {
+  const grp = useRef<THREE.Group>(null);
+  const { gl } = useThree();
+  const vel = useRef(0); // angular velocity from scrolling
   const apps = galleryApps;
   const targets = useMemo(
     () => (view === "sphere" ? sphereLayout(apps.length) : cylinderLayout(apps.length)),
     [view, apps.length]
   );
+
+  // Scrolling spins the sphere (with momentum), like Pahari. Passive so the
+  // page can still scroll down to the sections below.
+  useEffect(() => {
+    const el = gl.domElement;
+    const onWheel = (e: WheelEvent) => {
+      vel.current += e.deltaY * 0.00018;
+    };
+    el.addEventListener("wheel", onWheel, { passive: true });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, [gl]);
+
+  useFrame((_, delta) => {
+    if (!grp.current) return;
+    grp.current.rotation.y += 0.04 * delta + vel.current; // gentle drift + scroll spin
+    vel.current *= 0.92; // momentum decay
+  });
+
   return (
-    <group>
+    <group ref={grp}>
       {apps.map((app, i) => (
         <Card key={app.name + i} app={app} target={targets[i]} phase={i * 1.7} />
       ))}
@@ -136,14 +157,11 @@ export default function Scene({ view }: { view: View }) {
         <Gallery view={view} />
       </Suspense>
 
+      {/* drag to look around; scrolling spins the sphere (handled above) */}
       <OrbitControls
         enablePan={false}
-        enableZoom
-        minDistance={12}
-        maxDistance={28}
-        autoRotate
-        autoRotateSpeed={0.45}
-        rotateSpeed={0.55}
+        enableZoom={false}
+        rotateSpeed={0.5}
         dampingFactor={0.06}
         enableDamping
       />

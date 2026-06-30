@@ -79,7 +79,7 @@ export default function ImmersiveHero() {
             </div>
 
             <p className="text-[12px] uppercase tracking-[0.2em] text-ink-mute/70">
-              drag to explore · scroll to zoom
+              drag to look · scroll to spin
             </p>
           </div>
         </div>
