@@ -10,10 +10,10 @@ const Scene = dynamic(() => import("@/components/gallery/Scene"), {
   loading: () => null,
 });
 
-type View = "scatter" | "orbit";
+type View = "sphere" | "cylinder";
 
 export default function ImmersiveHero() {
-  const [view, setView] = useState<View>("scatter");
+  const [view, setView] = useState<View>("sphere");
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
@@ -60,7 +60,7 @@ export default function ImmersiveHero() {
             <div className="pointer-events-auto flex items-center gap-3 text-[13px] text-ink-mute">
               <span className="uppercase tracking-[0.18em]">Change the view</span>
               <div className="flex items-center gap-1 rounded-full border border-ink/12 bg-white/60 p-1 backdrop-blur">
-                {(["scatter", "orbit"] as View[]).map((v) => (
+                {(["sphere", "cylinder"] as View[]).map((v) => (
                   <button
                     key={v}
                     onClick={() => setView(v)}
