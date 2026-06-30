@@ -21,8 +21,8 @@ function Wordmark() {
 /* --------------------------------- Nav ----------------------------------- */
 function Nav() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/60 bg-paper/85 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Wordmark />
         <div className="hidden items-center gap-9 text-[14px] text-ink-soft md:flex">
           <a href="#capabilities" className="transition hover:text-ink">Use cases</a>

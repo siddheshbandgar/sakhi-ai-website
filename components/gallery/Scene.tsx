@@ -2,11 +2,14 @@
 
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Billboard, RoundedBox, OrbitControls, useTexture } from "@react-three/drei";
+import { Billboard, RoundedBox, OrbitControls, Text, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { galleryApps } from "@/lib/data";
 
 type View = "sphere" | "cylinder";
+
+// Fewer, more spaced-out apps read as "scattered" rather than clumped.
+const APPS = galleryApps.filter((_, i) => i % 3 !== 2); // ~35 of 52
 
 const logoFor = (name: string) => `/logos/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
 const rand = (seed: number) => {
@@ -16,8 +19,8 @@ const rand = (seed: number) => {
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 
 /* ----------------------------- layouts ----------------------------------- */
-// A sparse spherical shell with per-card depth jitter — cards surround the
-// centre at varied distances, so orbiting gives real spatial parallax.
+// Sparse spherical shell, wide and deep so cards spill beyond the screen and
+// sit both in front of and behind the centre.
 function sphereLayout(n: number): [number, number, number][] {
   const pts: [number, number, number][] = [];
   const off = 2 / n;
@@ -25,23 +28,45 @@ function sphereLayout(n: number): [number, number, number][] {
     const yy = i * off - 1 + off / 2;
     const rad = Math.sqrt(Math.max(0, 1 - yy * yy));
     const phi = i * GOLDEN;
-    const r = 10 + (rand(i + 3) - 0.5) * 5.5; // depth jitter
-    pts.push([Math.cos(phi) * rad * r, yy * r, Math.sin(phi) * rad * r]);
+    const r = 12 + (rand(i + 3) - 0.5) * 7; // big radius + strong depth jitter
+    pts.push([Math.cos(phi) * rad * r, yy * r * 1.1, Math.sin(phi) * rad * r]);
   }
   return pts;
 }
 
-// A tall cylinder wrapping around the centre.
 function cylinderLayout(n: number): [number, number, number][] {
   const pts: [number, number, number][] = [];
-  const height = 16;
+  const height = 20;
   for (let i = 0; i < n; i++) {
     const ang = i * GOLDEN;
     const yy = (i / Math.max(1, n - 1) - 0.5) * height;
-    const r = 8.5 + (rand(i + 7) - 0.5) * 3.2;
+    const r = 10 + (rand(i + 7) - 0.5) * 5;
     pts.push([Math.cos(ang) * r, yy, Math.sin(ang) * r]);
   }
   return pts;
+}
+
+/* --------------------------- centre 3D title ----------------------------- */
+// Lives inside the scene so cards can render in front of and behind it.
+function Title() {
+  return (
+    <Billboard>
+      <Text
+        font="/fonts/playfair-500.woff"
+        fontSize={1.7}
+        lineHeight={1.04}
+        letterSpacing={-0.02}
+        maxWidth={18}
+        anchorX="center"
+        anchorY="middle"
+        textAlign="center"
+        color="#231a12"
+        outlineWidth={0}
+      >
+        {"Every app you use,\nin one orbit"}
+      </Text>
+    </Billboard>
+  );
 }
 
 /* -------------------------------- one card ------------------------------- */
@@ -65,7 +90,7 @@ function Card({
     const g = group.current;
     if (!g) return;
     const t = state.clock.elapsedTime;
-    tmp.set(target[0], target[1] + Math.sin(t * 0.5 + phase) * 0.22, target[2]);
+    tmp.set(target[0], target[1] + Math.sin(t * 0.5 + phase) * 0.25, target[2]);
     g.position.lerp(tmp, 0.05);
     const s = hovered ? 1.18 : 1;
     g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, s, 0.15));
@@ -103,33 +128,34 @@ function Card({
 function Gallery({ view }: { view: View }) {
   const grp = useRef<THREE.Group>(null);
   const { gl } = useThree();
-  const vel = useRef(0); // angular velocity from scrolling
-  const apps = galleryApps;
+  const vel = useRef(0);
   const targets = useMemo(
-    () => (view === "sphere" ? sphereLayout(apps.length) : cylinderLayout(apps.length)),
-    [view, apps.length]
+    () => (view === "sphere" ? sphereLayout(APPS.length) : cylinderLayout(APPS.length)),
+    [view]
   );
 
-  // Scrolling spins the sphere (with momentum), like Pahari. Passive so the
-  // page can still scroll down to the sections below.
+  // Scrolling spins the gallery (with momentum). While the hero is at the top
+  // of the page we swallow the scroll so it rotates instead of leaving — use
+  // the nav / "see use cases" link to move on.
   useEffect(() => {
     const el = gl.domElement;
     const onWheel = (e: WheelEvent) => {
-      vel.current += e.deltaY * 0.00018;
+      if (window.scrollY < 6) e.preventDefault();
+      vel.current += e.deltaY * 0.0002;
     };
-    el.addEventListener("wheel", onWheel, { passive: true });
+    el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
   }, [gl]);
 
   useFrame((_, delta) => {
     if (!grp.current) return;
-    grp.current.rotation.y += 0.04 * delta + vel.current; // gentle drift + scroll spin
-    vel.current *= 0.92; // momentum decay
+    grp.current.rotation.y += 0.035 * delta + vel.current;
+    vel.current *= 0.93;
   });
 
   return (
     <group ref={grp}>
-      {apps.map((app, i) => (
+      {APPS.map((app, i) => (
         <Card key={app.name + i} app={app} target={targets[i]} phase={i * 1.7} />
       ))}
     </group>
@@ -141,23 +167,24 @@ export default function Scene({ view }: { view: View }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
-      camera={{ position: [0, 0, 18], fov: 52 }}
+      camera={{ position: [0, 0, 19], fov: 54 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onCreated={({ gl }) => {
         gl.setClearAlpha(0);
         gl.domElement.addEventListener("webglcontextlost", (e) => e.preventDefault(), false);
       }}
     >
-      <fog attach="fog" args={["#efe2cc", 20, 40]} />
+      <fog attach="fog" args={["#efe2cc", 24, 46]} />
       <ambientLight intensity={1.1} />
       <directionalLight position={[4, 8, 8]} intensity={0.95} />
       <directionalLight position={[-6, -2, -4]} intensity={0.3} color="#e8b486" />
 
       <Suspense fallback={null}>
+        <Title />
         <Gallery view={view} />
       </Suspense>
 
-      {/* drag to look around; scrolling spins the sphere (handled above) */}
+      {/* drag to look around; scrolling spins the gallery */}
       <OrbitControls
         enablePan={false}
         enableZoom={false}
