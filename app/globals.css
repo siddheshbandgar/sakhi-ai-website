@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
-  Sakhi AI — premium Indian design language.
+  Sakhi AI: premium Indian design language.
   Restraint over decoration: a near-white canvas, deep navy-charcoal ink,
   an editorial serif for headlines, and soft warm-orange→periwinkle glows
   that nod to an Indian sunrise. Devanagari and delicate line-art
@@ -9,18 +9,18 @@
 */
 
 @theme {
-  /* Surfaces — warm parchment */
+  /* Surfaces: warm parchment */
   --color-paper: #faf5ec;   /* warm cream canvas */
   --color-paper-2: #f3ebdb; /* faint sand panel */
   --color-card: #fffdf9;
 
-  /* Ink — warm espresso, harmonises with parchment */
+  /* Ink: warm espresso, harmonises with parchment */
   --color-ink: #241a12;
   --color-ink-soft: #5b4d3e;
   --color-ink-mute: #968875;
   --color-line: #ece2d2;    /* warm hairline */
 
-  /* Soft accents — used as glows, not fills */
+  /* Soft accents, used as glows, not fills */
   --color-warm: #ee7b3d;    /* sunrise saffron-orange */
   --color-cool: #8d92e6;    /* periwinkle / neel */
   --color-lav: #cdcff4;     /* light lavender */
@@ -50,13 +50,13 @@ body {
   background: color-mix(in srgb, var(--color-warm) 24%, transparent);
 }
 
-/* Editorial serif defaults — light, airy, premium */
+/* Editorial serif defaults: light, airy, premium */
 .font-display {
   font-feature-settings: "liga" 1, "calt" 1;
   letter-spacing: -0.02em;
 }
 
-/* Sunrise glow — soft orange bleeding into periwinkle, the Sarvam note */
+/* Sunrise glow: soft orange bleeding into periwinkle, the Sarvam note */
 .glow-hero {
   background:
     radial-gradient(60% 42% at 50% 0%, color-mix(in srgb, var(--color-warm) 38%, transparent) 0%, transparent 70%),
@@ -123,7 +123,7 @@ body {
   filter: blur(0);
 }
 
-/* Image reveal — gentle scale-down into place */
+/* Image reveal: gentle scale-down into place */
 .reveal-img {
   opacity: 0;
   transform: scale(1.06);

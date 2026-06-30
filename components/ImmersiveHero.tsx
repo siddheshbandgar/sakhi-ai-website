@@ -4,7 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import WaitlistForm from "@/components/WaitlistForm";
 
-// WebGL can't render during SSR — load the scene on the client only.
+// WebGL can't render during SSR, so load the scene on the client only.
 const Scene = dynamic(() => import("@/components/gallery/Scene"), {
   ssr: false,
   loading: () => null,
@@ -17,7 +17,7 @@ export default function ImmersiveHero() {
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-      {/* warm Indian parchment backdrop (even, paper-like — Pahari feel) */}
+      {/* warm Indian parchment backdrop (even, paper-like, Pahari feel) */}
       <div
         className="absolute inset-0"
         style={{
@@ -25,8 +25,8 @@ export default function ImmersiveHero() {
             "radial-gradient(95% 85% at 50% 38%, #f9f2e2 0%, #f2e8d3 58%, #ebdfc8 100%)",
         }}
       />
-      {/* 3D gallery (transparent canvas over the gradient) — title lives
-          inside the scene so apps pass in front of and behind it */}
+      {/* 3D gallery (transparent canvas over the gradient). The title lives
+          inside the scene so apps pass in front of and behind it. */}
       <div className="absolute inset-0">
         <Scene view={view} />
       </div>
@@ -34,12 +34,12 @@ export default function ImmersiveHero() {
       {/* bottom scrim so the dock reads over the parchment */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f3ecdd] via-[#f3ecdd]/45 to-transparent" />
 
-      {/* overlay content — only the dock; the headline is 3D */}
+      {/* overlay content: only the dock; the headline is 3D */}
       <div className="pointer-events-none relative z-10 flex h-full flex-col justify-end">
         <div className="px-6 pb-9">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-5">
             <p className="max-w-md text-center text-[15px] leading-relaxed text-ink-soft">
-              Sakhi connects to 2,000+ tools and gets the work done — just ask.
+              Sakhi connects to 2,000+ tools and gets the work done. Just ask.
             </p>
 
             <div className="pointer-events-auto">

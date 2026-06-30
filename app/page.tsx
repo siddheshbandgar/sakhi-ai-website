@@ -52,7 +52,7 @@ function Capabilities() {
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft sm:text-base">
             Works with 2,000+ apps you already use. Summarize emails, update tasks,
-            review PRs, pull reports — all in one conversation.
+            review PRs, and pull reports, all in one conversation.
           </p>
         </div>
       </Reveal>

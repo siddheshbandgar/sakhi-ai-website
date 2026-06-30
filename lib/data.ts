@@ -15,7 +15,7 @@ export const categories: Category[] = [
   {
     index: "01",
     title: "Work & Productivity",
-    blurb: "Your inbox, calendar, and tasks — handled before you even ask.",
+    blurb: "Your inbox, calendar, and tasks, handled before you even ask.",
     apps: [
       { name: "Gmail", prompt: "Summarize my unread emails and draft replies", tint: "#EA4335" },
       { name: "Calendar", prompt: "Check my calendar and plan today", tint: "#1A73E8" },
@@ -28,7 +28,7 @@ export const categories: Category[] = [
   {
     index: "02",
     title: "Content & Research",
-    blurb: "Create, publish, and research — without opening ten tabs.",
+    blurb: "Create, publish, and research without opening ten tabs.",
     apps: [
       { name: "Docs", prompt: "Draft and refine a Google Doc for me", tint: "#1A73E8" },
       { name: "Reddit", prompt: "Find and summarize Reddit discussions", tint: "#FF4500" },
@@ -41,7 +41,7 @@ export const categories: Category[] = [
   {
     index: "03",
     title: "Sales & Growth",
-    blurb: "Pipeline, payments, and performance — one conversation away.",
+    blurb: "Pipeline, payments, and performance, one conversation away.",
     apps: [
       { name: "HubSpot", prompt: "Review my deals and flag follow-ups", tint: "#FF7A59" },
       { name: "Salesforce", prompt: "Summarize Salesforce records and next steps", tint: "#00A1E0" },
@@ -71,7 +71,7 @@ export const categories: Category[] = [
 // Flat list for the hero marquee
 export const allApps = categories.flatMap((c) => c.apps.map((a) => ({ name: a.name, tint: a.tint })));
 
-// A denser set of well-known apps for the 3D floating gallery — a visual
+// A denser set of well-known apps for the 3D floating gallery: a visual
 // stand-in for the 2,000+ integrations Sakhi connects to.
 export const galleryApps: { name: string; tint: string }[] = [
   ...allApps,

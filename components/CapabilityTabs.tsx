@@ -31,7 +31,7 @@ export default function CapabilityTabs() {
 
       {/* Panel */}
       <div className="mt-10 grid gap-4 lg:grid-cols-[1fr_1.05fr]">
-        {/* Left — sample conversation */}
+        {/* Left: sample conversation */}
         <div className="card-line relative overflow-hidden rounded-3xl bg-card p-7">
           <div className="glow-soft pointer-events-none absolute -right-16 -top-16 h-56 w-56 opacity-60" />
           <p className="relative text-xs font-medium uppercase tracking-[0.18em] text-ink-mute">
@@ -52,7 +52,7 @@ export default function CapabilityTabs() {
             <div className="flex items-start gap-2.5">
               <AppChip name={sample.name} tint={sample.tint} size="sm" />
               <div className="max-w-[80%] rounded-2xl rounded-tl-md border border-line bg-card px-4 py-2.5 text-[14px] text-ink-soft">
-                <span className="font-medium text-ink">{sample.name}</span> connected — working on it…
+                <span className="font-medium text-ink">{sample.name}</span> connected. Working on it…
                 <span className="mt-2 flex items-center gap-1.5 text-[13px] text-[var(--color-sage)]">
                   <span className="grid h-4 w-4 place-items-center rounded-full bg-[var(--color-sage)] text-[9px] text-white">✓</span>
                   Done
@@ -62,7 +62,7 @@ export default function CapabilityTabs() {
           </div>
         </div>
 
-        {/* Right — app grid */}
+        {/* Right: app grid */}
         <div className="card-line rounded-3xl bg-card p-7">
           <p className="text-sm text-ink-soft">
             Sakhi works across these in <span className="text-ink">{cat.title.toLowerCase()}</span>:

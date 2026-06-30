@@ -1,7 +1,7 @@
 // Restrained Indian motifs: a delicate line flourish, a sprout/sparkle mark,
 // a fine wordmark glyph, and a soft lotus-dome illustration.
 
-// Thin symmetric line flourish — sits above section labels.
+// Thin symmetric line flourish that sits above section labels.
 export function Flourish({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 220 28" className={className} fill="none" aria-hidden="true">
@@ -18,7 +18,7 @@ export function Flourish({ className = "" }: { className?: string }) {
   );
 }
 
-// Four-point sprout sparkle — the small accent beside feature points.
+// Four-point sprout sparkle, the small accent beside feature points.
 export function Sparkle({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
@@ -30,7 +30,7 @@ export function Sparkle({ className = "" }: { className?: string }) {
   );
 }
 
-// Fine chakra-inspired glyph for the wordmark — quiet, not loud.
+// Fine chakra-inspired glyph for the wordmark; quiet, not loud.
 export function Glyph({ className = "" }: { className?: string }) {
   const spokes = Array.from({ length: 16 });
   return (
@@ -53,7 +53,7 @@ export function Glyph({ className = "" }: { className?: string }) {
   );
 }
 
-// Soft lotus-dome — a temple silhouette rendered in light strokes,
+// Soft lotus-dome, a temple silhouette rendered in light strokes,
 // used inside the lavender illustration panel.
 export function LotusDome({ className = "" }: { className?: string }) {
   return (

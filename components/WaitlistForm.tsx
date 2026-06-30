@@ -9,7 +9,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
-    // No backend yet — acknowledge locally. Wire this to your waitlist API.
+    // No backend yet; acknowledge locally. Wire this to your waitlist API.
     setDone(true);
   }
 
@@ -24,7 +24,7 @@ export default function WaitlistForm({ dark = false }: { dark?: boolean }) {
           ✓
         </span>
         <p className="text-sm font-medium">
-          You&apos;re on the list — we&apos;ll be in touch with early access.
+          You&apos;re on the list. We&apos;ll be in touch with early access.
         </p>
       </div>
     );

@@ -135,7 +135,7 @@ function Gallery({ view }: { view: View }) {
   );
 
   // Scrolling spins the gallery (with momentum). While the hero is at the top
-  // of the page we swallow the scroll so it rotates instead of leaving — use
+  // of the page we swallow the scroll so it rotates instead of leaving. Use
   // the nav / "see use cases" link to move on.
   useEffect(() => {
     const el = gl.domElement;
