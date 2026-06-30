@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { Suspense, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Billboard, RoundedBox, Text, OrbitControls, Stars } from "@react-three/drei";
+import { Billboard, RoundedBox, OrbitControls, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { galleryApps } from "@/lib/data";
 
 type View = "sphere" | "cylinder";
+
+const logoFor = (name: string) => `/logos/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
 
 /* ----------------------------- layout helpers ---------------------------- */
 function sphereLayout(n: number, r: number): [number, number, number][] {
@@ -49,15 +51,17 @@ function Card({
   const group = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const tmp = useMemo(() => new THREE.Vector3(), []);
-  const tint = useMemo(() => new THREE.Color(app.tint), [app.tint]);
+  const tex = useTexture(logoFor(app.name));
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 8;
 
   useFrame((state) => {
     const g = group.current;
     if (!g) return;
     const t = state.clock.elapsedTime;
-    tmp.set(target[0], target[1] + Math.sin(t * 0.6 + phase) * 0.18, target[2]);
+    tmp.set(target[0], target[1] + Math.sin(t * 0.55 + phase) * 0.16, target[2]);
     g.position.lerp(tmp, 0.05);
-    const s = hovered ? 1.16 : 1;
+    const s = hovered ? 1.18 : 1;
     g.scale.setScalar(THREE.MathUtils.lerp(g.scale.x, s, 0.15));
   });
 
@@ -65,34 +69,26 @@ function Card({
     <group ref={group}>
       <Billboard>
         <RoundedBox
-          args={[1.78, 1.12, 0.08]}
-          radius={0.12}
-          smoothness={4}
+          args={[1.5, 1.5, 0.12]}
+          radius={0.22}
+          smoothness={5}
           onPointerOver={(e) => {
             e.stopPropagation();
             setHovered(true);
+            document.body.style.cursor = "pointer";
           }}
-          onPointerOut={() => setHovered(false)}
+          onPointerOut={() => {
+            setHovered(false);
+            document.body.style.cursor = "auto";
+          }}
         >
-          <meshStandardMaterial
-            color="#0b0b11"
-            emissive={tint}
-            emissiveIntensity={hovered ? 0.6 : 0.28}
-            roughness={0.6}
-            metalness={0.1}
-          />
+          <meshStandardMaterial color="#ffffff" roughness={0.6} metalness={0.05} />
         </RoundedBox>
-        {/* accent bar */}
-        <mesh position={[0, 0.46, 0.05]}>
-          <planeGeometry args={[1.78, 0.06]} />
-          <meshBasicMaterial color={tint} toneMapped={false} />
+        {/* logo */}
+        <mesh position={[0, 0, 0.07]}>
+          <planeGeometry args={[1.12, 1.12]} />
+          <meshBasicMaterial map={tex} transparent toneMapped={false} />
         </mesh>
-        <Text position={[0, 0.08, 0.06]} fontSize={0.42} color={app.tint} anchorX="center" anchorY="middle">
-          {app.name.slice(0, 1)}
-        </Text>
-        <Text position={[0, -0.32, 0.06]} fontSize={0.15} color="#e9e9f2" anchorX="center" anchorY="middle">
-          {app.name}
-        </Text>
       </Billboard>
     </group>
   );
@@ -102,7 +98,7 @@ function Card({
 function Gallery({ view }: { view: View }) {
   const apps = galleryApps;
   const targets = useMemo(
-    () => (view === "sphere" ? sphereLayout(apps.length, 7.2) : cylinderLayout(apps.length, 6, 9)),
+    () => (view === "sphere" ? sphereLayout(apps.length, 7.4) : cylinderLayout(apps.length, 6.2, 9)),
     [view, apps.length]
   );
   return (
@@ -120,12 +116,9 @@ export default function Scene({ view }: { view: View }) {
     <Canvas
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 17], fov: 50 }}
-      gl={{ antialias: true, alpha: false, powerPreference: "high-performance" }}
-      style={{ background: "#070709" }}
+      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onCreated={({ gl }) => {
-        gl.setClearColor("#070709", 1);
-        // Allow the browser to restore a lost GL context instead of going
-        // blank permanently (default behaviour does NOT restore).
+        gl.setClearAlpha(0);
         gl.domElement.addEventListener(
           "webglcontextlost",
           (e) => e.preventDefault(),
@@ -133,16 +126,16 @@ export default function Scene({ view }: { view: View }) {
         );
       }}
     >
-      <color attach="background" args={["#070709"]} />
-      <fog attach="fog" args={["#070709", 18, 34]} />
+      {/* warm haze so distant tiles melt into the parchment background */}
+      <fog attach="fog" args={["#f0e3cd", 19, 33]} />
 
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[5, 8, 6]} intensity={0.7} />
-      <directionalLight position={[-6, -3, -6]} intensity={0.35} color="#8d92e6" />
+      <ambientLight intensity={1.05} />
+      <directionalLight position={[4, 8, 8]} intensity={1.0} />
+      <directionalLight position={[-6, -2, -4]} intensity={0.3} color="#e8b486" />
 
-      <Stars radius={60} depth={40} count={1100} factor={3} saturation={0} fade speed={0.6} />
-
-      <Gallery view={view} />
+      <Suspense fallback={null}>
+        <Gallery view={view} />
+      </Suspense>
 
       <OrbitControls
         enablePan={false}
@@ -150,7 +143,7 @@ export default function Scene({ view }: { view: View }) {
         minDistance={11}
         maxDistance={24}
         autoRotate
-        autoRotateSpeed={0.55}
+        autoRotateSpeed={0.5}
         rotateSpeed={0.5}
         dampingFactor={0.08}
         enableDamping
