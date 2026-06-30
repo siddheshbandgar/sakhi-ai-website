@@ -22,7 +22,15 @@ export default function ImmersiveHero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(95% 85% at 50% 38%, #f9f2e2 0%, #f2e8d3 58%, #ebdfc8 100%)",
+            "radial-gradient(100% 90% at 50% 32%, #faf4e6 0%, #f3e9d4 52%, #e7dabf 100%)",
+        }}
+      />
+      {/* gilded vignette for depth and a premium edge */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(120% 100% at 50% 50%, transparent 58%, rgba(120,84,28,0.10) 100%)",
         }}
       />
       {/* 3D gallery (transparent canvas over the gradient). The title lives

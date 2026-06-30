@@ -45,7 +45,8 @@ function Capabilities() {
     <section id="capabilities" className="relative mx-auto max-w-6xl px-6 py-28">
       <Reveal>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-4xl font-medium tracking-tight text-ink sm:text-[52px] sm:leading-[1.06]">
+          <Flourish className="mx-auto h-6 w-36 text-gold/60" />
+          <h2 className="mt-6 font-display text-4xl font-medium tracking-tight text-ink sm:text-[52px] sm:leading-[1.06]">
             Tell it what to do.
             <br />
             <span className="italic font-normal">Sakhi gets it done.</span>
@@ -73,15 +74,31 @@ function Why() {
     { t: "Speaks your language", d: "English, हिंदी, and the mix you actually type. Built for how Bharat works." },
   ];
   return (
-    <section id="why" className="relative border-y border-line bg-paper-2/50 py-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-4 md:grid-cols-3">
+    <section id="why" className="relative overflow-hidden bg-wine py-28 text-paper">
+      {/* gilded glow for depth */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(75% 55% at 50% 0%, rgba(178,129,47,0.20), transparent 62%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-6xl px-6">
+        <Reveal>
+          <div className="mx-auto max-w-2xl text-center">
+            <Flourish className="mx-auto h-6 w-36 text-gold-soft/70" />
+            <h2 className="mt-6 font-display text-4xl font-medium tracking-tight text-paper sm:text-[48px] sm:leading-[1.08]">
+              Built for how <span className="italic font-normal">Bharat</span> works
+            </h2>
+          </div>
+        </Reveal>
+        <div className="mt-14 grid gap-4 md:grid-cols-3">
           {points.map((p, i) => (
             <Reveal key={p.t} delay={i * 110}>
-              <div className="card-line h-full rounded-3xl bg-card p-7">
-                <Sparkle className="h-4 w-4 text-[var(--color-sage)]" />
-                <h3 className="mt-4 font-display text-xl font-medium text-ink">{p.t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{p.d}</p>
+              <div className="h-full rounded-3xl border border-gold/25 bg-white/[0.035] p-7 backdrop-blur-sm">
+                <Sparkle className="h-4 w-4 text-gold-soft" />
+                <h3 className="mt-4 font-display text-xl font-medium text-paper">{p.t}</h3>
+                <p className="mt-2 text-[15px] leading-relaxed text-paper/65">{p.d}</p>
               </div>
             </Reveal>
           ))}
@@ -100,12 +117,15 @@ function Stats() {
   ];
   return (
     <section className="mx-auto max-w-5xl px-6 py-24">
+      <Reveal>
+        <Flourish className="mx-auto mb-14 h-6 w-36 text-gold/50" />
+      </Reveal>
       <div className="grid gap-10 sm:grid-cols-3">
         {stats.map((s, i) => (
           <Reveal key={s.l} delay={i * 120}>
             <div className="text-center">
               <p className="font-display text-6xl font-normal tracking-tight text-ink sm:text-7xl">{s.node}</p>
-              <p className="mt-2 text-[14px] uppercase tracking-[0.16em] text-ink-mute">{s.l}</p>
+              <p className="mt-3 text-[13px] uppercase tracking-[0.2em] text-gold">{s.l}</p>
             </div>
           </Reveal>
         ))}
@@ -119,10 +139,10 @@ function FinalCTA() {
   return (
     <section id="waitlist" className="px-6 pb-28">
       <Reveal>
-        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-[36px] border border-line bg-card px-6 py-20 text-center">
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-[36px] border border-gold/30 bg-card px-6 py-20 text-center">
           <div className="glow-hero pointer-events-none absolute inset-x-0 top-0 h-72 opacity-90" />
           <div className="relative">
-            <Flourish className="mx-auto h-7 w-44 text-warm/70" />
+            <Flourish className="mx-auto h-7 w-44 text-gold/70" />
             <h2 className="mt-6 font-display text-4xl font-normal tracking-tight text-ink sm:text-[56px] sm:leading-[1.05]">
               Meet your AI <span className="italic">sakhi</span>
             </h2>
@@ -140,7 +160,7 @@ function FinalCTA() {
 /* -------------------------------- Footer --------------------------------- */
 function Footer() {
   return (
-    <footer className="border-t border-line">
+    <footer className="border-t border-gold/20">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 px-6 py-10 sm:flex-row">
         <Wordmark />
         <p className="text-[13px] text-ink-mute">

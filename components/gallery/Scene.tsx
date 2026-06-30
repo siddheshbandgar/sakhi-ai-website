@@ -60,7 +60,7 @@ function Title() {
         anchorX="center"
         anchorY="middle"
         textAlign="center"
-        color="#231a12"
+        color="#181310"
         outlineWidth={0}
       >
         {"Every app you use,\nin one orbit"}
