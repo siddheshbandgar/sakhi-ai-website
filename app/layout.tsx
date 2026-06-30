@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Newsreader, Inter, Tiro_Devanagari_Hindi } from "next/font/google";
+import { Playfair_Display, Inter, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
 
-const newsreader = Newsreader({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  variable: "--font-newsreader",
+  variable: "--font-playfair",
   display: "swap",
   style: ["normal", "italic"],
 });
@@ -40,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${inter.variable} ${tiro.variable}`}>
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${tiro.variable}`}>
       <body>{children}</body>
     </html>
   );

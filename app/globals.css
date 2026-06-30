@@ -9,16 +9,16 @@
 */
 
 @theme {
-  /* Surfaces */
-  --color-paper: #fbfaf8;   /* warm near-white canvas */
-  --color-paper-2: #f6f4ef; /* faint warm panel */
-  --color-card: #ffffff;
+  /* Surfaces — warm parchment */
+  --color-paper: #faf5ec;   /* warm cream canvas */
+  --color-paper-2: #f3ebdb; /* faint sand panel */
+  --color-card: #fffdf9;
 
-  /* Ink */
-  --color-ink: #191926;     /* deep navy-charcoal */
-  --color-ink-soft: #56565f;
-  --color-ink-mute: #8a8a93;
-  --color-line: #ece9e2;    /* hairline */
+  /* Ink — warm espresso, harmonises with parchment */
+  --color-ink: #241a12;
+  --color-ink-soft: #5b4d3e;
+  --color-ink-mute: #968875;
+  --color-line: #ece2d2;    /* warm hairline */
 
   /* Soft accents — used as glows, not fills */
   --color-warm: #ee7b3d;    /* sunrise saffron-orange */
@@ -28,7 +28,7 @@
   --color-gold: #c9a24b;
 
   /* Fonts (wired up via next/font variables) */
-  --font-display: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-deva: var(--font-tiro), serif;
 }

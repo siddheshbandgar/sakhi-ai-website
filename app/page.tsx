@@ -1,6 +1,7 @@
 import { Glyph, Flourish, Sparkle } from "@/components/Motifs";
 import WaitlistForm from "@/components/WaitlistForm";
 import ImmersiveHero from "@/components/ImmersiveHero";
+import CapabilityTabs from "@/components/CapabilityTabs";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 
@@ -24,7 +25,7 @@ function Nav() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Wordmark />
         <div className="hidden items-center gap-9 text-[14px] text-ink-soft md:flex">
-          <a href="#how" className="transition hover:text-ink">How it works</a>
+          <a href="#capabilities" className="transition hover:text-ink">Use cases</a>
           <a href="#why" className="transition hover:text-ink">Why Sakhi</a>
         </div>
         <a
@@ -38,36 +39,31 @@ function Nav() {
   );
 }
 
-/* ------------------------------- How it works ---------------------------- */
-function How() {
-  const steps = [
-    { k: "Tell her", d: "Ask in plain language — English, हिंदी, or your mix of both." },
-    { k: "She acts", d: "Sakhi works across your apps, with your context, in one chat." },
-    { k: "It's done", d: "Emails sent, reports pulled, tasks closed — the work, finished." },
-  ];
+/* ------------------------------ Capabilities ----------------------------- */
+function Capabilities() {
   return (
-    <section id="how" className="relative mx-auto max-w-6xl px-6 py-28">
+    <section id="capabilities" className="relative mx-auto max-w-6xl px-6 py-28">
       <Reveal>
         <div className="mx-auto max-w-2xl text-center">
-          <Flourish className="mx-auto h-6 w-36 text-warm/60" />
-          <h2 className="mt-6 font-display text-4xl font-normal tracking-tight text-ink sm:text-[52px] sm:leading-[1.08]">
+          <p className="text-[12px] font-medium uppercase tracking-[0.22em] text-ink-mute">
+            Use cases
+          </p>
+          <h2 className="mt-4 font-display text-4xl font-medium tracking-tight text-ink sm:text-[52px] sm:leading-[1.06]">
             Tell it what to do.
             <br />
-            <span className="italic">Sakhi gets it done.</span>
+            <span className="italic font-normal">Sakhi gets it done.</span>
           </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft sm:text-base">
+            Works with 2,000+ apps you already use. Summarize emails, update tasks,
+            review PRs, pull reports — all in one conversation.
+          </p>
         </div>
       </Reveal>
-      <div className="mt-16 grid gap-4 sm:grid-cols-3">
-        {steps.map((s, i) => (
-          <Reveal key={s.k} delay={i * 110}>
-            <div className="card-line lift h-full rounded-3xl bg-card p-7">
-              <span className="font-display text-sm text-gold">0{i + 1}</span>
-              <h3 className="mt-2 font-display text-2xl font-medium text-ink">{s.k}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-soft">{s.d}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
+      <Reveal delay={120}>
+        <div className="mt-14">
+          <CapabilityTabs />
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -154,7 +150,7 @@ function Footer() {
           Made with care in Bharat · © {new Date().getFullYear()} Sakhi AI
         </p>
         <div className="flex gap-7 text-[13px] text-ink-soft">
-          <a href="#how" className="transition hover:text-ink">How it works</a>
+          <a href="#capabilities" className="transition hover:text-ink">Use cases</a>
           <a href="#waitlist" className="transition hover:text-ink">Waitlist</a>
         </div>
       </div>
@@ -168,7 +164,7 @@ export default function Home() {
     <main id="top" className="bg-paper">
       <Nav />
       <ImmersiveHero />
-      <How />
+      <Capabilities />
       <Why />
       <Stats />
       <FinalCTA />

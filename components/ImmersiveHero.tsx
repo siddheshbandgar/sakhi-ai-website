@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { Flourish } from "@/components/Motifs";
 import WaitlistForm from "@/components/WaitlistForm";
 
 // WebGL can't render during SSR — load the scene on the client only.
@@ -26,7 +25,8 @@ export default function ImmersiveHero() {
             "radial-gradient(120% 90% at 50% -8%, #f8d9a8 0%, #f6e8cf 38%, #f3ecdd 62%, #ece9f3 100%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_42%,rgba(255,255,255,0.35),transparent_70%)]" />
+      {/* calm the centre so the headline reads cleanly over the logos */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(58%_46%_at_50%_50%,rgba(248,242,229,0.82),rgba(248,242,229,0.35)_55%,transparent_75%)]" />
 
       {/* 3D gallery (transparent canvas over the gradient) */}
       <div className="absolute inset-0">
@@ -42,16 +42,12 @@ export default function ImmersiveHero() {
         <div className="flex-1" />
 
         <div className="px-6 text-center">
-          <Flourish className="mx-auto h-6 w-36 text-[#c95a18]/70" />
-          <p className="mt-5 font-deva text-[14px] tracking-wide text-ink-soft">
-            आपकी डिजिटल सखी · AI for Bharat
-          </p>
-          <h1 className="mt-4 font-display text-5xl font-normal leading-[1.04] tracking-tight text-ink sm:text-7xl md:text-[88px]">
+          <h1 className="mx-auto font-display text-[3.25rem] font-medium leading-[0.98] tracking-[-0.01em] text-ink sm:text-7xl md:text-[92px]">
             Every app you use,
             <br />
-            <span className="italic">in one orbit</span>
+            <span className="italic font-normal">in one orbit</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft sm:text-lg">
+          <p className="mx-auto mt-7 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">
             Sakhi connects to 2,000+ tools and gets the work done — just ask.
           </p>
         </div>
