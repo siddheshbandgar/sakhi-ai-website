@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Billboard, RoundedBox, OrbitControls, Text, useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { galleryApps } from "@/lib/data";
+import { asset } from "@/lib/asset";
 
 type View = "sphere" | "cylinder";
 
@@ -15,7 +16,7 @@ const NO_GLYPH = new Set([
 // Fewer, spaced-out cubes read as premium rather than clumped.
 const APPS = galleryApps.filter((a) => !NO_GLYPH.has(a.name)).filter((_, i) => i % 4 !== 3);
 
-const glyphFor = (name: string) => `/glyphs/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
+const glyphFor = (name: string) => asset(`/glyphs/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`);
 const rand = (seed: number) => {
   const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -56,7 +57,7 @@ function Title() {
   return (
     <Billboard>
       <Text
-        font="/fonts/cormorant-600.woff"
+        font={asset("/fonts/cormorant-600.woff")}
         fontSize={2.1}
         lineHeight={1.02}
         letterSpacing={-0.01}

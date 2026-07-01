@@ -1,5 +1,7 @@
 // A clean white tile showing the app's real logo (from /public/logos).
-const logoFor = (name: string) => `/logos/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
+import { asset } from "@/lib/asset";
+
+const logoFor = (name: string) => asset(`/logos/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`);
 
 export default function AppChip({
   name,
