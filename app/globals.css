@@ -9,16 +9,16 @@
 */
 
 @theme {
-  /* Surfaces: warm ivory paper */
-  --color-paper: #f5eee0;   /* warm ivory canvas */
-  --color-paper-2: #ece2cf; /* sand panel */
-  --color-card: #fffdf8;
+  /* Surfaces: clean white */
+  --color-paper: #ffffff;   /* white canvas */
+  --color-paper-2: #f4f3f0; /* faint warm-grey panel */
+  --color-card: #ffffff;
 
   /* Ink: rich, warm near-black for crisp (not harsh) contrast */
   --color-ink: #191410;
-  --color-ink-soft: #4a3f33; /* deep cocoa, readable body */
-  --color-ink-mute: #8a7c66;
-  --color-line: #e3d7c1;     /* warm hairline */
+  --color-ink-soft: #4a4238; /* readable body */
+  --color-ink-mute: #8c8478;
+  --color-line: #eae6de;     /* soft warm hairline */
 
   /* Premium jewel + metal accents */
   --color-gold: #b2812f;     /* brass / haldi gold */

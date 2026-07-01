@@ -22,15 +22,15 @@ export default function ImmersiveHero() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(100% 90% at 50% 32%, #faf4e6 0%, #f3e9d4 52%, #e7dabf 100%)",
+            "radial-gradient(100% 90% at 50% 30%, #ffffff 0%, #fbfbfa 55%, #f2f1ee 100%)",
         }}
       />
-      {/* gilded vignette for depth and a premium edge */}
+      {/* soft vignette for depth and a premium edge */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 100% at 50% 50%, transparent 58%, rgba(120,84,28,0.10) 100%)",
+            "radial-gradient(120% 100% at 50% 50%, transparent 60%, rgba(80,70,55,0.07) 100%)",
         }}
       />
       {/* 3D gallery (transparent canvas over the gradient). The title lives
@@ -40,7 +40,7 @@ export default function ImmersiveHero() {
       </div>
 
       {/* bottom scrim so the dock reads over the parchment */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-[#f3ecdd] via-[#f3ecdd]/45 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-white via-white/45 to-transparent" />
 
       {/* overlay content: only the dock; the headline is 3D */}
       <div className="pointer-events-none relative z-10 flex h-full flex-col justify-end">

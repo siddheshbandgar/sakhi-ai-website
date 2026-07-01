@@ -188,7 +188,7 @@ export default function Scene({ view }: { view: View }) {
         gl.domElement.addEventListener("webglcontextlost", (e) => e.preventDefault(), false);
       }}
     >
-      <fog attach="fog" args={["#efe2cc", 24, 46]} />
+      <fog attach="fog" args={["#f6f6f4", 24, 46]} />
       <ambientLight intensity={1.1} />
       <directionalLight position={[4, 8, 8]} intensity={0.95} />
       <directionalLight position={[-6, -2, -4]} intensity={0.3} color="#e8b486" />
