@@ -8,10 +8,14 @@ import { galleryApps } from "@/lib/data";
 
 type View = "sphere" | "cylinder";
 
-// Fewer, more spaced-out apps read as "scattered" rather than clumped.
-const APPS = galleryApps.filter((_, i) => i % 3 !== 2); // ~35 of 52
+// Brands without a clean white glyph are left out of the cube gallery.
+const NO_GLYPH = new Set([
+  "Slack", "Salesforce", "Ahrefs", "LinkedIn", "Outlook", "Teams", "Canva", "Monday",
+]);
+// Fewer, spaced-out cubes read as premium rather than clumped.
+const APPS = galleryApps.filter((a) => !NO_GLYPH.has(a.name)).filter((_, i) => i % 4 !== 3);
 
-const logoFor = (name: string) => `/logos/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
+const glyphFor = (name: string) => `/glyphs/${name.toLowerCase().replace(/[^a-z0-9]/g, "")}.png`;
 const rand = (seed: number) => {
   const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
   return x - Math.floor(x);
@@ -52,11 +56,11 @@ function Title() {
   return (
     <Billboard>
       <Text
-        font="/fonts/playfair-500.woff"
-        fontSize={1.7}
-        lineHeight={1.04}
-        letterSpacing={-0.02}
-        maxWidth={18}
+        font="/fonts/cormorant-600.woff"
+        fontSize={2.1}
+        lineHeight={1.02}
+        letterSpacing={-0.01}
+        maxWidth={20}
         anchorX="center"
         anchorY="middle"
         textAlign="center"
@@ -82,9 +86,19 @@ function Card({
   const group = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const tmp = useMemo(() => new THREE.Vector3(), []);
-  const tex = useTexture(logoFor(app.name));
+  const tex = useTexture(glyphFor(app.name));
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = 8;
+
+  // The cube itself is the brand colour; light brands are darkened so the
+  // white glyph stays legible.
+  const cubeColor = useMemo(() => {
+    const c = new THREE.Color(app.tint);
+    const lum = 0.299 * c.r + 0.587 * c.g + 0.114 * c.b;
+    if (lum > 0.62) c.multiplyScalar(0.66);
+    else if (lum > 0.42) c.multiplyScalar(0.86);
+    return c;
+  }, [app.tint]);
 
   useFrame((state) => {
     const g = group.current;
@@ -100,9 +114,9 @@ function Card({
     <group ref={group}>
       <Billboard>
         <RoundedBox
-          args={[1.7, 1.7, 0.14]}
-          radius={0.26}
-          smoothness={5}
+          args={[1.7, 1.7, 0.42]}
+          radius={0.38}
+          smoothness={6}
           onPointerOver={(e) => {
             e.stopPropagation();
             setHovered(true);
@@ -113,10 +127,10 @@ function Card({
             document.body.style.cursor = "auto";
           }}
         >
-          <meshStandardMaterial color="#fffdf9" roughness={0.62} metalness={0.04} />
+          <meshStandardMaterial color={cubeColor} roughness={0.34} metalness={0.24} />
         </RoundedBox>
-        <mesh position={[0, 0, 0.085]}>
-          <planeGeometry args={[1.22, 1.22]} />
+        <mesh position={[0, 0, 0.215]}>
+          <planeGeometry args={[1.15, 1.15]} />
           <meshBasicMaterial map={tex} transparent toneMapped={false} />
         </mesh>
       </Billboard>

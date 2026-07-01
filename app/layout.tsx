@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, Tiro_Devanagari_Hindi } from "next/font/google";
+import { Cormorant_Garamond, Hanken_Grotesk, Tiro_Devanagari_Hindi } from "next/font/google";
 import "./globals.css";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-cormorant",
   display: "swap",
+  weight: ["500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-hanken",
   display: "swap",
 });
 
@@ -40,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} ${tiro.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${hanken.variable} ${tiro.variable}`}>
       <body>{children}</body>
     </html>
   );
