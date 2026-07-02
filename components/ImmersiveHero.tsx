@@ -17,20 +17,14 @@ export default function ImmersiveHero() {
 
   return (
     <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
-      {/* warm Indian parchment backdrop (even, paper-like, Pahari feel) */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(100% 90% at 50% 30%, #ffffff 0%, #fbfbfa 55%, #f2f1ee 100%)",
-        }}
-      />
-      {/* soft vignette for depth and a premium edge */}
+      {/* clean white base */}
+      <div className="absolute inset-0 bg-white" />
+      {/* warm sunrise glow: saffron -> periwinkle -> lavender */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(120% 100% at 50% 50%, transparent 60%, rgba(80,70,55,0.07) 100%)",
+            "radial-gradient(72% 52% at 50% 6%, color-mix(in srgb, var(--color-warm) 34%, transparent) 0%, transparent 72%), radial-gradient(60% 58% at 16% 20%, color-mix(in srgb, var(--color-cool) 26%, transparent) 0%, transparent 62%), radial-gradient(62% 58% at 86% 16%, color-mix(in srgb, var(--color-lav) 46%, transparent) 0%, transparent 64%)",
         }}
       />
       {/* 3D gallery (transparent canvas over the gradient). The title lives
